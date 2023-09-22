@@ -27,7 +27,7 @@ const FILMS = [
 
 router.get('/', (req, res, next) => {
     console.log('GET /films');
-    res.json(FILMS);
+    res.json(FILMS); 
   });
 
 module.exports = router;
