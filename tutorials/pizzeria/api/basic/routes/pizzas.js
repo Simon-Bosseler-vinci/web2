@@ -53,12 +53,13 @@ router.get('/:id', (req, res) => { // le router /:id permet d'indiquer à Expres
    GET /pizzas?order=-title : descending order by title
 */
 router.get('/', (req, res, next) => {
-    const orderByTitle = req?.query?.order?.includes('title') // req.query permet de récupérer les paramètres dans l'URL après "?"
-                                                              // dans la constante on vérifie si le paramètre order est bien "title"   
+    const orderByTitle = req?.query?.order?.includes('title') ? req.query.order : undefined; // résultat du if à gauche des ":" et résultat du else à droite
+    // req.query permet de récupérer les paramètres dans l'URL après "?"
+    // dans la constante orderbyTitle on vérifie si le paramètre order est bien "title", si oui on renvoie req.query.order avec 'title' sinon undefined  
     let orderedMenu;
     console.log(`order by ${orderByTitle ?? 'not requested'}`); // si orderByTitle n'est pas nulle on affiche "order by title" ou "-title" sinon "not requested"
     if (orderByTitle) // cas non-nulle
-      orderedMenu = [...MENU].sort((a, b) => a.title.localeCompare(b.title)); // on trie les objets du tableau 
+      orderedMenu = [...MENU].sort((a, b) => a.title.localeCompare(b.title)); // on trie les objets du tableau sur une copie du tableau 
     if (orderByTitle === '-title') orderedMenu = orderedMenu.reverse();
   
     console.log('GET /pizzas');

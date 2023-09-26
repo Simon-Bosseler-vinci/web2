@@ -1,0 +1,14 @@
+### Read all films with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/films
+
+### Create a pizza
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title":"Avatar",
+    "duration": 140,
+    "budget" : 1300000,
+    "link" : "https://"
+}
