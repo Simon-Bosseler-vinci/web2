@@ -2,6 +2,9 @@
 @baseUrl = http://localhost:3000
 GET {{baseUrl}}/films
 
+### Read all films with a bigger or equals duration than 120
+GET {{baseUrl}}/films?minimum-duration=120
+
 ### Create a pizza
 POST {{baseUrl}}/films
 Content-Type: application/json

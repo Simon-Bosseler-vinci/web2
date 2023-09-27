@@ -68,7 +68,7 @@ router.get('/', (req, res, next) => {
 
   // Create a pizza to be added to the menu.
 router.post('/', (req, res) => {
-  const title = req?.body?.title?.length !== 0 ? req.body.title : undefined;
+  const title = req?.body?.title?.length !== 0 ? req.body.title : undefined; // vérification des paramètres
   const content = req?.body?.content?.length !== 0 ? req.body.content : undefined;
 
   console.log('POST /pizzas');
@@ -90,5 +90,41 @@ router.post('/', (req, res) => {
   res.json(newPizza);
 });
 
-  
+// Delete a pizza from the menu based on its id
+router.delete('/:id', (req, res) => {
+  console.log(`DELETE /pizzas/${req.params.id}`);
+
+  const foundIndex = MENU.findIndex(pizza => pizza.id == req.params.id); // on prend le req.params de l'URL (findIndex() renvoie -1 si rien de trouver)
+
+  if (foundIndex < 0) return res.sendStatus(404);
+
+  const itemsRemovedFromMenu = MENU.splice(foundIndex, 1); // la méthode splice() retire les éléments et créé un tableau de ces éléments supprimés
+  const itemRemoved = itemsRemovedFromMenu[0]; // on récupère la seule valeur qui est en première position du tableau renvoyé par la méthode splice()
+
+  res.json(itemRemoved);
+});
+
+// Update a pizza based on its id and new values for its parameters
+router.patch('/:id', (req, res) => {
+  console.log(`PATCH /pizzas/${req.params.id}`);
+
+  const title = req?.body?.title !== 0 ? req.body.title : undefined; // vérification des paramètres 
+  const content = req?.body?.content !== 0 ? req.body.content : undefined;
+
+  console.log('POST /pizzas');
+
+  if (!title && !content) return res.sendStatus(400); // si aucun paramètres de changement n'est mit, erreur
+
+  const foundIndex = MENU.findIndex(pizza => pizza.id == req.params.id); // on prend l'ID de la pizza à modifier (-1 si n'existe pas)
+
+  if (foundIndex < 0) return res.sendStatus(404);
+
+  const updatedPizza = {...MENU[foundIndex], ...req.body}; // dans une copie du tableau au bon ID, on écrase les anciennes valeurs par les nouvelles (req.body) 
+
+  MENU[foundIndex] = updatedPizza; // on met à jour dans le tableau au bon ID
+
+  res.json(updatedPizza);
+});
+
+ 
 module.exports = router;
