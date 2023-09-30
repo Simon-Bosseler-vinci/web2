@@ -1,8 +1,5 @@
 var express = require('express');
-const { serialize, parse } = require('../utils/json');
 var router = express.Router();
-
-const jsonDbPath = __dirname + '/../data/pizzas.json'; // création du répertoire data dans lequel s'affichera les réponses
 
 const MENU = [
   {

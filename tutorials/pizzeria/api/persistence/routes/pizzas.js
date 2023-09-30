@@ -1,5 +1,5 @@
 var express = require('express');
-const { serialize, parse } = require('../utils/json');
+const { serialize, parse } = require('../utils/json'); // importation des variables
 var router = express.Router();
 
 const jsonDbPath = __dirname + '/../data/pizzas.json'; // création du répertoire data dans lequel s'affichera les réponses
@@ -42,12 +42,14 @@ const MENU = [
 // Read the pizza identified by an id in the menu
 router.get('/:id', (req, res) => { // le router /:id permet d'indiquer à Express que l'iD se situe directement après le "/""
     console.log(`GET /pizzas/${req.params.id}`); // req.params récupère des segments de paramètres dans l'URL
-  
-    const indexOfPizzaFound = MENU.findIndex((pizza) => pizza.id == req.params.id); // variable qui trouve l'ID de la pizza 
+
+    const pizzas = parse(jsonDbPath, MENU); // si le fichier jsonDbPath n'existe pas, on renvoie le MENU de base sans rien crée
+
+    const indexOfPizzaFound = pizzas.findIndex((pizza) => pizza.id == req.params.id); // variable qui trouve l'ID de la pizza 
   
     if (indexOfPizzaFound < 0) return res.sendStatus(404); // si l'on ne trouve pas d'ID, on renvoie une erreur 404
   
-    res.json(MENU[indexOfPizzaFound]); // on renvoit dans json en prenant dans le MENU le bon index
+    res.json(pizzas[indexOfPizzaFound]); // on renvoit dans json en prenant dans le MENU le bon index
   });
 
 
@@ -61,12 +63,15 @@ router.get('/', (req, res, next) => {
     // dans la constante orderbyTitle on vérifie si le paramètre order est bien "title", si oui on renvoie req.query.order avec 'title' sinon undefined  
     let orderedMenu;
     console.log(`order by ${orderByTitle ?? 'not requested'}`); // si orderByTitle n'est pas nulle on affiche "order by title" ou "-title" sinon "not requested"
+
+    const pizzas = parse(jsonDbPath, MENU);
+
     if (orderByTitle) // cas non-nulle
-      orderedMenu = [...MENU].sort((a, b) => a.title.localeCompare(b.title)); // on trie les objets du tableau sur une copie du tableau 
+        orderedMenu = [...pizzas].sort((a, b) => a.title.localeCompare(b.title)); // on trie les objets du tableau sur une copie du tableau 
     if (orderByTitle === '-title') orderedMenu = orderedMenu.reverse();
   
     console.log('GET /pizzas');
-    res.json(orderedMenu ?? MENU); // on renvoie dans le json le tableau par défaut si la variable orderedMenu est nulle
+    res.json(orderedMenu ?? pizzas); // on renvoie dans le json le tableau par défaut si la variable orderedMenu est nulle
   });
 
   // Create a pizza to be added to the menu.
@@ -76,10 +81,12 @@ router.post('/', (req, res) => {
 
   console.log('POST /pizzas');
 
+  const pizzas = parse(jsonDbPath, MENU);
+
   if (!title || !content) return res.sendStatus(400); // error code '400 Bad request'
 
-  const lastItemIndex = MENU?.length !== 0 ? MENU.length - 1 : undefined;
-  const lastId = lastItemIndex !== undefined ? MENU[lastItemIndex]?.id : 0;
+  const lastItemIndex = pizzas?.length !== 0 ? pizzas.length - 1 : undefined;
+  const lastId = lastItemIndex !== undefined ? pizzas[lastItemIndex]?.id : 0;
   const nextId = lastId + 1;
 
   const newPizza = {
@@ -88,7 +95,9 @@ router.post('/', (req, res) => {
     content: content,
   };
 
-  MENU.push(newPizza);
+  pizzas.push(newPizza);
+
+  serialize(jsonDbPath, pizzas);
 
   res.json(newPizza);
 });
@@ -97,12 +106,16 @@ router.post('/', (req, res) => {
 router.delete('/:id', (req, res) => {
   console.log(`DELETE /pizzas/${req.params.id}`);
 
-  const foundIndex = MENU.findIndex(pizza => pizza.id == req.params.id); // on prend le req.params de l'URL (findIndex() renvoie -1 si rien de trouver)
+  const pizzas = parse(jsonDbPath, MENU);
+
+  const foundIndex = pizzas.findIndex(pizza => pizza.id == req.params.id); // on prend le req.params de l'URL (findIndex() renvoie -1 si rien de trouver)
 
   if (foundIndex < 0) return res.sendStatus(404);
 
-  const itemsRemovedFromMenu = MENU.splice(foundIndex, 1); // la méthode splice() retire les éléments et créé un tableau de ces éléments supprimés
+  const itemsRemovedFromMenu = pizzas.splice(foundIndex, 1); // la méthode splice() retire les éléments et créé un tableau de ces éléments supprimés
   const itemRemoved = itemsRemovedFromMenu[0]; // on récupère la seule valeur qui est en première position du tableau renvoyé par la méthode splice()
+
+  serialize(jsonDbPath, pizzas);
 
   res.json(itemRemoved);
 });
@@ -116,15 +129,19 @@ router.patch('/:id', (req, res) => {
 
   console.log('POST /pizzas');
 
-  if (!title && !content) return res.sendStatus(400); // si aucun paramètres de changement n'est mit, erreur (patch changement d'un paramètre) => Put nécessite tout ! 
+  if (!title && !content) return res.sendStatus(400); // si aucun paramètres de changement n'est mit, erreur (patch changement d'un paramètre) => Put nécessite tout !
+  
+  const pizzas = parse(jsonDbPath, MENU); 
 
-  const foundIndex = MENU.findIndex(pizza => pizza.id == req.params.id); // on prend l'ID de la pizza à modifier (-1 si n'existe pas)
+  const foundIndex = pizzas.findIndex(pizza => pizza.id == req.params.id); // on prend l'ID de la pizza à modifier (-1 si n'existe pas)
 
   if (foundIndex < 0) return res.sendStatus(404);
 
-  const updatedPizza = {...MENU[foundIndex], ...req.body}; // dans une copie du tableau au bon ID, on écrase les anciennes valeurs par les nouvelles (req.body) 
+  const updatedPizza = {...pizzas[foundIndex], ...req.body}; // dans une copie du tableau au bon ID, on écrase les anciennes valeurs par les nouvelles (req.body) 
 
-  MENU[foundIndex] = updatedPizza; // on met à jour dans le tableau au bon ID
+  pizzas[foundIndex] = updatedPizza; // on met à jour dans le tableau au bon ID
+
+  serialize(jsonDbPath, pizzas);
 
   res.json(updatedPizza);
 });
