@@ -2,20 +2,32 @@
 @baseUrl = http://localhost:3000
 GET {{baseUrl}}/pizzas
 
+### Read a pizza by the ID
+GET {{baseUrl}}/pizzas/2
+
 ### Read all pizzas sorted by title (ascending)
 GET {{baseUrl}}/pizzas/?order=title
 
 ### Read all pizzas sorted by title (descending)
 GET {{baseUrl}}/pizzas/?order=-title
 
-### Create a pizza
+### Create a pizza (centent-type est la représentation des données que l'on va envoyer au format json)
 POST {{baseUrl}}/pizzas
-Content-Type: application/json
+Content-Type: application/json 
 
 {
     "title":"Magic Green",
     "content":"Epinards, Brocolis, Olives vertes, Basilic"
 }
+
+### Create a pizza which lacks a property
+POST {{baseUrl}}/pizzas
+Content-Type: application/json
+
+{
+    "content":"Epinards, Brocolis, Olives vertes, Basilic"
+}
+
 
 ### Delete pizza identified by 2
 DELETE {{baseUrl}}/pizzas/2
