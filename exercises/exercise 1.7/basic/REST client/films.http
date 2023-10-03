@@ -27,11 +27,11 @@ PATCH {{baseUrl}}/films/3
 Content-Type: application/json
 
 {
-    "title":"Seigneur des anneau"
+    "title":"Seigneur des anneaux"
 }
 
 ### update a films or create by the ID
-PUT {{baseUrl}}/films/3
+PUT {{baseUrl}}/films/6
 Content-Type: application/json
 
 {
