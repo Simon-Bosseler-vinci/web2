@@ -43,7 +43,7 @@ const MENU = [
 router.get('/:id', (req, res) => { // le router /:id permet d'indiquer à Express que l'iD se situe directement après le "/""
     console.log(`GET /pizzas/${req.params.id}`); // req.params récupère des segments de paramètres dans l'URL
 
-    const pizzas = parse(jsonDbPath, MENU); // si le fichier jsonDbPath n'existe pas, on renvoie le MENU de base sans rien crée
+    const pizzas = parse(jsonDbPath, MENU); // si le fichier jsonDbPath n'existe pas, on renvoie le MENU de base sans rien crée, et lors de modif on ira dans le nouveau fichier
 
     const indexOfPizzaFound = pizzas.findIndex((pizza) => pizza.id == req.params.id); // variable qui trouve l'ID de la pizza 
   

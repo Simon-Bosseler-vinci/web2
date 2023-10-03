@@ -8,7 +8,7 @@ const fs = require('fs');
  * @param {Array} defaultArray - Content to be used when the .json file does not exists
  * @returns {Array} : the array that was parsed from the file (or defaultArray)
  */
-function parse(filePath, defaultArray = []) { // sert à vérifier si le fichier donné est existant ou non, si non, on renvoie le tableau par défaut passé en paramètre, si oui, on renvoie le fichier
+function parse(filePath, defaultArray = []) { // sert à vérifier si le fichier donné est existant ou non, si non, on renvoie le tableau par défaut passé en paramètre, si oui, on renvoie le fichier modifié
   if (!fs.existsSync(filePath)) return defaultArray; // si l'on trouve le fichier, c'est lui qui contiendra les données modifiés
   const fileData = fs.readFileSync(filePath);
   try {
