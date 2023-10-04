@@ -56,7 +56,7 @@ function createOnePizza(title, content) {
   const pizzas = parse(jsonDbPath, defaultPizzas);
 
   const createdPizza = {
-    id: getNextId(),
+    id: getNextId(), // faire pizzas.length +1;
     title,
     content,
   };

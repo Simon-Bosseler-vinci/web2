@@ -14,7 +14,7 @@ const router = express.Router();
    GET /pizzas?order=-title : descending order by title
 */
 router.get('/', (req, res) => {
-  const allPizzasPotentiallyOrdered = readAllPizzas(req?.query?.order);
+  const allPizzasPotentiallyOrdered = readAllPizzas(req?.query?.order); // appel de la méthode qui lit cela un ordre, sinon renvoie les objets dans l'odre de défaut
 
   return res.json(allPizzasPotentiallyOrdered);
 });

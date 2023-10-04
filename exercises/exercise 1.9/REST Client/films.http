@@ -1,0 +1,42 @@
+### Read all films with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/films
+
+### Read a film by the ID
+GET {{baseUrl}}/films/2
+
+### Read all films with a bigger or equals duration than 120
+GET {{baseUrl}}/films?minimum-duration=120
+
+### Create a film (centent-type est la représentation des données que l'on va envoyer au format json)
+POST {{baseUrl}}/films
+Content-Type: application/json 
+
+{
+    "title":"Avatar",
+    "duration": 140,
+    "budget" : 1300000,
+    "link" : "https://"
+}
+
+### delete a film from FILMS by the ID
+DELETE {{baseUrl}}/films/2
+
+### update a film from FILMS by the ID 
+PATCH {{baseUrl}}/films/3
+Content-Type: application/json
+
+{
+    "title":"Seigneur des anneau"
+}
+
+### update a films or create by the ID
+PUT {{baseUrl}}/films/2
+Content-Type: application/json
+
+{
+    "title" : "Pirate",
+    "duration" : 210,
+    "budget" : 800000,
+    "link" :  "https://"
+}
