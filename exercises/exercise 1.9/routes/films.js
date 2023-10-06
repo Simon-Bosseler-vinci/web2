@@ -20,7 +20,7 @@ const router = express.Router();
   
 router.get('/:id',(req,res) => {
     const filmFound = readOneFilm(req.params.id);
-    if(!filmFound) return res.sendStatus(404);
+    if(!filmFound) return res.sendStatus(404); // undefined = id non trouvé
     return res.json(filmFound);
 });
 

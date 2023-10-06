@@ -43,10 +43,10 @@ function readOneFilm(id){
 
     const films = parse(jsonDbPath,FILMS); // on recherche le fichier, si pas trouvé on renvoie FILMS, sinon on renvoie le fichier contentant les modifs
 
-    const idParam = Number(id); // conversion d'un string en int 
-    const indexFound = films.findIndex( film => film.id === idParam ); 
+    const idParam = Number(id); // conversion d'un string en Number
+    const indexFound = films.findIndex( film => film.id === idParam ); // le triple égal vérifie la valeur + le type 
 
-    if(indexFound < 0) return undefined;
+    if(indexFound < 0) return undefined; // findIndex renvoie -1 si pas trouvé
     return films[indexFound];
 }
 
@@ -79,7 +79,7 @@ function deleteOneFilm(id){
     const films = parse(jsonDbPath,FILMS);
 
     const idParam = Number(id);
-    const filmID = films.findIndex(film => film.id === idParam); // étant donné la vérification du type par le triple égal, on modifie le type de l'ID de String à Number 
+    const filmID = films.findIndex(film => film.id === idParam); 
     if(filmID < 0) return undefined;
 
     const filmRemoveFromFILMS = films.splice(filmID,1); // renvoie d'un tableau contenant tous éléments supprimés (le chiffre est le nbr d'éléments derrière l'index)
