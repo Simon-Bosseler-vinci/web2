@@ -6,7 +6,7 @@ GET {{baseUrl}}/texte
 GET {{baseUrl}}/texte?value=easy
 
 ### Read a texte by the ID 2
-GET {{baseUrl}}/texte/7456fd08-6405-4831-96b2-c80722ba9924
+GET {{baseUrl}}/texte/1
 
 ### Create a texte 
 POST {{baseUrl}}/texte
@@ -17,11 +17,11 @@ Content-Type: application/json
     "level" : "easy"
 }
 
-### delete a film from FILMS by the ID
-DELETE {{baseUrl}}/texte/0fb14334-e23d-4300-a3f1-03e6f8634ad1
+### delete a texte from TEXTES by the ID
+DELETE {{baseUrl}}/texte/4
 
 ### update a film or create by the ID
-PUT {{baseUrl}}/texte/0fb14334-e23d-4300-a3f1-03e6f8634ad1
+PUT {{baseUrl}}/texte/1
 Content-Type: application/json
 
 {
