@@ -56,8 +56,8 @@ const nextID = textes.length +1 ;
     level,
   };
 
-  const sameID = textes.find(texte => texte.id === newTexte.id);
-  if(sameID) return undefined; // cas du contenu similaire
+  const sameID = textes.findIndex(texte => texte.id === newTexte.id);
+  if(sameID >= 0) return undefined; // cas de l'ID similaire
 
   textes.push(newTexte);
 
@@ -84,9 +84,8 @@ function updatedOrCreateTexte(id, propertiesToUpdate) {
   const textes = parse(jsonDbPath, TEXTES);
 
   const findId = textes.findIndex((texte) => texte.id === id);
-
-  if (findId < 0) {
-    // cas de l'ID inconnue, on créé à partir d'ici
+  if (findId < 0) { // cas de l'ID inconnue, on créé à partir d'ici
+    
     const newTexte = {
       id,
       content: propertiesToUpdate.content,
@@ -96,6 +95,7 @@ function updatedOrCreateTexte(id, propertiesToUpdate) {
     serialize(jsonDbPath, textes);
     return newTexte;
   }
+  // sinon, on met à jour 
   const update = { ...textes[findId], ...propertiesToUpdate };
   textes[findId] = update;
   serialize(jsonDbPath, textes);

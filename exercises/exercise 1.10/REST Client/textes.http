@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ### delete a texte from TEXTES by the ID
-DELETE {{baseUrl}}/texte/4
+DELETE {{baseUrl}}/texte/3
 
 ### update a film or create by the ID
 PUT {{baseUrl}}/texte/1
