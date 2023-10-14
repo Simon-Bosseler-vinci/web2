@@ -1,6 +1,6 @@
 const body = document.querySelector("body");
-const divMessage = document.querySelector("#message");
-const divCounter = document.querySelector("#counter");
+const divMessage = document.querySelector("#message"); // on prend la valeur de la div message du body 
+const divCounter = document.querySelector("#counter"); // idem avec le counter 
 
 body.addEventListener("click",countClick); // on pourrait mettre un window.addEventListener() pour afficher sur tous l'écran étant que body est trop petit
                                            // il suffit d'augmenter la taille du body via le CSS
