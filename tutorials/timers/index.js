@@ -9,11 +9,11 @@ const delayInSeconds = 2;
 const delayInMiliSeconds = delayInSeconds * 1000;
 
 function delayedAlert() {
-  timeoutID = setTimeout(() => {
+  timeoutID = setTimeout(() => { // la fonction setTimeOut() attent une fonction en 1er arg et en 2ème arg un temps défini avant d'appeler le 1er arg
     alert(`You asked for this popup ${delayInSeconds}s ago!`);
   }, delayInMiliSeconds);
 }
 
 function clearAlert() {
-  clearTimeout(timeoutID);
+  clearTimeout(timeoutID); // la fonction clearTimeOut permet d'arrêter la fonction lancée de setTimeout()
 }
