@@ -5,14 +5,13 @@ btn1.addEventListener("mouseover", startTime);
 btn2.addEventListener("click", countClick);
 
 let chrono;
-const time = 5000; // 5000ms = 5sec
 let count = 0;
-let start;
+let start; // on l'initialise ici car on l'utilise dans les deux fonctions (comme la variable chrono)
 
 function startTime() {
     chrono = setTimeout( () => {
         alert(`Game over, you did not click 10 times within 5s`);
-    }, time); // si on dépasse 5sec 
+    }, 5000); // si on dépasse 5sec, on envoie alert()
     start = new Date(); // on prend la date (le temps) du démarrage 
 }
 

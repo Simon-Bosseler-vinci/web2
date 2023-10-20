@@ -21,4 +21,4 @@ setInterval(() => {
         phase = 0; // on revient au début (attention mettre phase 0 pour qu'à l'incrémentation, on revient à 1)
     }
     phase++;
-}, 1000); // au bout des 2sec, on exécute toute la méthode
+}, 2000); // au bout des 2sec, on exécute toute la méthode et pas avant !! 
