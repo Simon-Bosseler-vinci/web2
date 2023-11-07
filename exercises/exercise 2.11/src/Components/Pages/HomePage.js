@@ -6,7 +6,7 @@ import imgAvatar from '../../img/avatar.jpg';
 
 const HomePage = () => {
   clearPage();
-  renderPageTitle("Titre");
+  renderPageTitle("HomePage");
   renderHomePage();
 };
 

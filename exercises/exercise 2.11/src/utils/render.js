@@ -9,6 +9,9 @@ const renderPageTitle = (title) => {
   const pageTitle = document.createElement('h4');
   pageTitle.innerText = title;
   pageTitle.style.textAlign = 'center';
+  pageTitle.style.color = 'orange';
+  pageTitle.style.paddingBottom = '30px';
+  pageTitle.style.paddingTop = '30px';
   main.appendChild(pageTitle);
 };
 

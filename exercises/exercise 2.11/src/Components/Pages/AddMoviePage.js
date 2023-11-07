@@ -11,11 +11,10 @@ const AddMoviePage = () => {
 
 
 function addMovie(){
-  const main = document.querySelector('main');
-  main.innerHTML = `
-  <form>
+  const main = document.querySelector('main'); // recherche sur Bootstrap pour la création d'un formulaire
+  main.innerHTML += `
+  <form> 
   <fieldset>
-    <legend>Title</legend>
     <div class="mb-3">
       <label for="titleInput" class="form-label">Title</label>
       <input type="text" minlength="3" maxlength="20" id="titleInput" class="form-control" placeholder="Title input" required>
@@ -39,7 +38,7 @@ function addMovie(){
 
   const formulaire = document.querySelector('form');
   formulaire.addEventListener("submit", (e) =>{ // e est utilisé pour faire un e.preventDefault(), ce qui empêche de recharger la page au submit
-    // il faut empêcher de recharger la page car cela va recharer le site et réintiliser la liste des films
+    // il faut empêcher de recharger la page car cela va recharger le site et réintiliser la liste des films
     const title = document.querySelector('#titleInput');
     const duration = document.querySelector('#durationInput');
     const budget = document.querySelector('#budgetInput');
