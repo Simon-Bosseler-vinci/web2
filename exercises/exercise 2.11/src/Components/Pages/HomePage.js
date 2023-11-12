@@ -33,7 +33,7 @@ function createCard(src, movieTitle, movieDescription, src2, movieTitle2, movieD
   main.appendChild(row);
 
   const col = document.createElement('div');
-  col.className = 'col-6';
+  col.className = 'col';
   row.appendChild(col);
 
   const col2 = document.createElement('div');

@@ -1,6 +1,5 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
 import {addOneMovie} from '../../utils/movies';
-// eslint-disable-next-line import/named
 import Navigate from "../Router/Navigate";
 
 const AddMoviePage = () => {
@@ -46,7 +45,7 @@ function addMovie(){
 
     addOneMovie(title.value,duration.value,budget.value,link.value); // on ajoute le movie DANS la fonction en paramètre du addEventListener
     e.preventDefault();
-    Navigate('/viewMoviePage');
+    Navigate('/viewMoviePage'); // on redirige vers la page des views
   }); 
 
 }

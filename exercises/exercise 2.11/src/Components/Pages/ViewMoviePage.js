@@ -13,17 +13,19 @@ function createTableMovies () {
   const main = document.querySelector('main');
 
   const MOVIES = readAllMovie();
-  const getMovie = getAllTableLine(MOVIES);
-  const tableMovie = getTableMovie(getMovie);
+  const getMovies = getAllTableLine(MOVIES);
+  const tableMovie = getTableMovie(getMovies);
 
   main.innerHTML += tableMovie;
 
 };
 
 function getTableMovie(tableLines){
-  const tableMovie = `<table class="table table-striped">
+  const tableMovie = `
+  <table class="table table-striped">
   <thead>
     <tr>
+      <th scope="col">ID</th>
       <th scope="col">Title</th>
       <th scope="col">duration</th>
       <th scope="col">budget</th>
@@ -46,6 +48,7 @@ function getAllTableLine(table){
 
   table?.forEach((movie) => {
     movieTableLine += `<tr>
+    <td>${movie.id}</td>
     <td>${movie.title}</td>
     <td>${movie.duration}</td>
     <td>${movie.budget}</td>
