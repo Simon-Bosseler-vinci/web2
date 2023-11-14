@@ -20,7 +20,7 @@ function createTableMovies () {
 
 };
 
-function getTableMovie(tableLines){
+function getTableMovie(tableLines){ // on passe en paramètre les films récupérés d'avant
   const tableMovie = `
   <table class="table table-striped">
   <thead>
@@ -43,7 +43,7 @@ return tableMovie;
 
 }
 
-function getAllTableLine(table){
+function getAllTableLine(table){ // on passe en paramètres les films que l'on a récupéré par la méthode readAllMovie()
   let movieTableLine = '';
 
   table?.forEach((movie) => {
@@ -55,7 +55,7 @@ function getAllTableLine(table){
     <td>${movie.link}</td>
     </tr>`;
   });
-  return movieTableLine;
+  return movieTableLine; // on renvoie toutes les lignes (données) du tableau MOVIES
 }
 
 
