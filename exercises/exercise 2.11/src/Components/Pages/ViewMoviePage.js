@@ -3,7 +3,7 @@ import { readAllMovie } from '../../utils/movies';
 
 const ViewMoviePage = () => {
   clearPage();
-  renderPageTitle("ViewMoviePage");
+  renderPageTitle("ViewMoviePage"); 
   createTableMovies();
 };
 
