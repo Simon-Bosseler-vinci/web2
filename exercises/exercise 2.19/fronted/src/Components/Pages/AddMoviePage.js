@@ -64,9 +64,6 @@ async function addOneMovie(e){
   const reponse = await fetch('/api/films',options); // on utilise un proxy !! Pour éviter de relacher la sécurité
   if(!reponse.ok)throw new Error(`fetch error : ${reponse.status} : ${reponse.statusText}`);
 
-  const newFilm = await reponse.json();
-  // eslint-disable-next-line no-console
-  console.log('New film added : ',newFilm);
   Navigate('/');
 }
 

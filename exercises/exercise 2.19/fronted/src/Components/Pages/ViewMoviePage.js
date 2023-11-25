@@ -1,5 +1,6 @@
 import { clearPage,renderPageTitle } from '../../utils/render';
-import { readAllMovie } from '../../utils/movies';
+import { readAllMovie, deleteOneMovie } from '../../utils/movies';
+import Navigate from '../Router/Navigate';
 
 const ViewMoviePage = () => {
   clearPage();
@@ -14,8 +15,16 @@ async function createTableMovies () {
   const MOVIES = await readAllMovie();
   const getMovies = getAllTableLine(MOVIES);
   const tableMovie = getTableMovie(getMovies);
-
   main.innerHTML += tableMovie;
+
+  const deleteButtons = document.querySelectorAll('.btn btn-danger delete'); // on récupère un tableau sur base de la classe ".delete"
+  deleteButtons.forEach(button => {
+    button.addEventListener("click", (e) =>{
+      const movieId = Number(e.target.id);
+      deleteOneMovie(movieId);
+      Navigate('/');
+    });
+  })
 
 };
 
@@ -47,15 +56,20 @@ function getAllTableLine(table){ // on passe en paramètres les films que l'on a
 
   table?.forEach((movie) => {
     movieTableLine += `<tr>
-    <td>${movie.id}</td>
+    <td id='idInput'>${movie.id}</td>
     <td>${movie.title}</td>
     <td>${movie.duration}</td>
     <td>${movie.budget}</td>
     <td>${movie.link}</td>
+    <td> 
+        <button type='button' class="btn btn-danger delete" data-element-id="${movie.id}">Delete</button>
+    </td>
     </tr>`;
+
   });
   return movieTableLine; // on renvoie toutes les lignes (données) du tableau MOVIES
 }
+
 
 
 export default ViewMoviePage;
