@@ -17,10 +17,10 @@ async function createTableMovies () {
   const tableMovie = getTableMovie(getMovies);
   main.innerHTML += tableMovie;
 
-  const deleteButtons = document.querySelectorAll('.btn btn-danger delete'); // on récupère un tableau sur base de la classe ".delete"
+  const deleteButtons = document.querySelectorAll('.delete'); // on récupère un tableau sur base de la classe ".delete"
   deleteButtons.forEach(button => {
     button.addEventListener("click", (e) =>{
-      const movieId = Number(e.target.id);
+      const movieId = Number(e.target.dataset.elementId);
       deleteOneMovie(movieId);
       Navigate('/');
     });
