@@ -1,12 +1,19 @@
 // on a supprimé le tableau contenant tous les films (MOVIES), car avec le serialize, on les retient déjà dans l'API
 
  async function readAllMovie (){
-  const response = await fetch('/api/films'); // si la promesse marche, on reçoit le tableau de l'API avec tous les films 
+
+  let films;
+  try{
+    const response = await fetch('/api/films'); // si la promesse marche, on reçoit le tableau de l'API avec tous les films
+
   if(!response.ok)throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-  const films = await response.json();
-  // eslint-disable-next-line no-console
-  console.log('Affichage films : ', films);
-    return films; // on renvoie tous le tableau
+   films = await response.json();
+
+  }catch(err){
+    // eslint-disable-next-line no-console
+    console.error('Error : ',err);
+  }
+  return films;
 }
 
 async function deleteOneMovie(id){
@@ -33,5 +40,34 @@ async function deleteOneMovie(id){
   return deleteMovie;
 }
 
+async function updateOneFilm(id, title, duration, budget, link){
 
-module.exports = {readAllMovie, deleteOneMovie}
+  const options = {
+    method : 'PATCH',
+    body : JSON.stringify({
+      title,
+      duration,
+      budget,
+      link
+    }),
+    headers : {
+      'Content-type' : 'application/json',
+    },
+  };
+
+  let updateMovie;
+
+  try{
+    const response = await fetch(`/api/films/${id}`,options);
+    if(!response.ok)throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+
+    updateMovie = response.json();
+  }catch(err){
+    // eslint-disable-next-line no-console
+    console.error('Error : ',err);
+  }
+  return updateMovie;
+}
+
+
+module.exports = {readAllMovie, deleteOneMovie, updateOneFilm}
