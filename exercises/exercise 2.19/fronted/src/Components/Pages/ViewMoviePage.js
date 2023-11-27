@@ -1,6 +1,7 @@
 import { clearPage,renderPageTitle } from '../../utils/render';
-import { readAllMovie, deleteOneMovie } from '../../utils/movies';
+import { readAllMovies, deleteOneMovie } from '../../utils/movies';
 import Navigate from '../Router/Navigate';
+import UpdatePage from './UpdatePage';
 
 const ViewMoviePage = () => {
   clearPage();
@@ -12,14 +13,14 @@ async function createTableMovies () {
 
   const main = document.querySelector('main');
 
-  const MOVIES = await readAllMovie();
+  const MOVIES = await readAllMovies(); 
   const getMovies = getAllTableLine(MOVIES);
   const tableMovie = getTableMovie(getMovies);
   main.innerHTML += tableMovie;
 
   const deleteButtons = document.querySelectorAll('.delete'); // on récupère un tableau sur base de la classe ".delete"
   deleteButtons.forEach(button => {
-    button.addEventListener("click", (e) =>{
+    button.addEventListener("click", (e) =>{ // l'event (e) permet de traiter boutton par boutton, et ici on s'en sert pour renvoyer son id
       const movieId = Number(e.target.dataset.elementId); // on récupére de l'objet son attribut data-element-id qui sera récupéré par e.target sous forme dataset(data).elementID(element-id)
       deleteOneMovie(movieId);
       Navigate('/');
@@ -28,8 +29,9 @@ async function createTableMovies () {
 
   const updateButtons = document.querySelectorAll('.update');
   updateButtons.forEach(button => {
-    button.addEventListener("click", () =>{
-      Navigate(`/updateMoviePage`);
+    button.addEventListener("click", (e) =>{
+      const movieId = Number(e.target.dataset.elementId);
+      UpdatePage(movieId);
     });
   });
 };

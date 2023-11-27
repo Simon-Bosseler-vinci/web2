@@ -61,7 +61,7 @@ async function addOneMovie(e){
     },
   };
 
-  const reponse = await fetch('/api/films',options); // on utilise un proxy !! Pour éviter de relacher la sécurité
+  const reponse = await fetch('/api/films',options); // on utilise un proxy (/api) !! Pour éviter de relacher la sécurité
   if(!reponse.ok)throw new Error(`fetch error : ${reponse.status} : ${reponse.statusText}`);
 
   Navigate('/');

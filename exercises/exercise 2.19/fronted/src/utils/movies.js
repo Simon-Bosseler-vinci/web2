@@ -1,9 +1,9 @@
 // on a supprimé le tableau contenant tous les films (MOVIES), car avec le serialize, on les retient déjà dans l'API
 
- async function readAllMovie (){
-
+ async function readAllMovies (){
+  
   let films;
-  try{
+  try{ // '/api' sera remplacé par localhost:3000 donc le requête à l'API sera 'localhost:3000/films'
     const response = await fetch('/api/films'); // si la promesse marche, on reçoit le tableau de l'API avec tous les films
 
   if(!response.ok)throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
@@ -14,6 +14,19 @@
     console.error('Error : ',err);
   }
   return films;
+}
+
+async function readOneMovie(id){
+  let film;
+  try{
+    const response = await fetch(`/api/films/${id}`);
+    if(!response.ok)throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+    film = response.json();
+  }catch(err){
+    // eslint-disable-next-line no-console
+    console.error('Error : ',err);
+  }
+  return film;
 }
 
 async function deleteOneMovie(id){
@@ -56,7 +69,6 @@ async function updateOneFilm(id, title, duration, budget, link){
   };
 
   let updateMovie;
-
   try{
     const response = await fetch(`/api/films/${id}`,options);
     if(!response.ok)throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
@@ -70,4 +82,4 @@ async function updateOneFilm(id, title, duration, budget, link){
 }
 
 
-module.exports = {readAllMovie, deleteOneMovie, updateOneFilm}
+module.exports = { readAllMovies, readOneMovie, deleteOneMovie, updateOneFilm}
