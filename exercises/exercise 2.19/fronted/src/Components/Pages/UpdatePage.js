@@ -37,8 +37,6 @@ const UpdateMoviePage = (movieId) => {
 </form>
   `;
 
-
-
   const formulaire = document.querySelector('form');
   formulaire.addEventListener("submit", async()=>{
 

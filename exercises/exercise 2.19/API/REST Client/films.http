@@ -13,7 +13,7 @@ POST {{baseUrl}}/films
 Content-Type: application/json 
 
 {
-    "title":"Avatar",
+    "title":"Avatar 2",
     "duration": 140,
     "budget" : 1300000,
     "link" : "https://"
@@ -27,7 +27,7 @@ PATCH {{baseUrl}}/films/3
 Content-Type: application/json
 
 {
-    "title":"Seigneur des anneau"
+    "title":"Seigneur des anneaux"
 }
 
 ### update a films or create by the ID

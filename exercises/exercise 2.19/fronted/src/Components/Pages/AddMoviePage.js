@@ -1,5 +1,5 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
-import {readAllMovie} from '../../utils/movies';
+import readAllMovie from '../../utils/movies';
 import Navigate from "../Router/Navigate";
 
 const AddMoviePage = () => {

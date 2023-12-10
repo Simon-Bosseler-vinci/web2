@@ -30,7 +30,7 @@ function readAllTexte(level) {
   if (!level) { // cas d'aucune entrée dans l'URL (lecture simple de tous les textes)
     orderTexte = textes; 
   } else if (tabOfLevel.includes(level)) {
-    orderTexte = textes.filter((t) => t.level === level); // cas du level trouvé dans le tableau
+    orderTexte = textes.filter(t => t.level === level); // cas du level trouvé dans le tableau
   } else {
     return undefined;
   }
@@ -47,7 +47,7 @@ function readOneTexte(id) {
 }
 
 function createOneTexte(content, level) {
-  const textes = parse(jsonDbPath, TEXTES);
+const textes = parse(jsonDbPath, TEXTES);
   
 const nextID = textes.length +1 ;
   const newTexte = {
@@ -83,7 +83,7 @@ function deleteOneTexte(id) {
 function updatedOrCreateTexte(id, propertiesToUpdate) {
   const textes = parse(jsonDbPath, TEXTES);
 
-  const findId = textes.findIndex((texte) => texte.id === id);
+  const findId = textes.findIndex(texte => texte.id === id);
   if (findId < 0) { // cas de l'ID inconnue, on créé à partir d'ici
     
     const newTexte = {

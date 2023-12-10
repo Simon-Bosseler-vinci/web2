@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const content = req?.body?.content !== 0 ? req.body.content : undefined;
+  const content = req?.body?.content !== 0 ? req.body.content : undefined; // vérification de la longueur des paramètres entrés 
   const level = req?.body?.level !== 0 ? req.body.level : undefined;
 
   if (!content || !level) {
